@@ -3,6 +3,13 @@
 
 # Git
 .github/**/*
-.github
+.gitignore
 
 # Spring boot
+mvnw
+mvnw.cmd
+
+# Docker
+Dockerfile
+
+
