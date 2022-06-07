@@ -1,5 +1,6 @@
 package pt.ua.clothesbackend.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +21,20 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class JpaConfiguration {
 
+    @Value("")
+    private static String dbHost;
+
+    @Value("")
+    private static Integer dbPort;
+
+    @Value("")
+    private static String dbRootPassword;
+
     @Bean(name="mysqlDataSource")
     @Primary
     public DataSource dataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url("jdbc:mysql://localhost:13306/tqsdb");
         dataSourceBuilder.username("root");
         dataSourceBuilder.password("123456");
