@@ -20,9 +20,14 @@
     <properties>
         <project.jar.name>clothes-backend</project.jar.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
+
+
         <sonar.organization>tqs-project-2022</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
     <dependencies>
