@@ -21,14 +21,14 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class JpaConfiguration {
 
-    @Value("")
+    /*@Value("")
     private static String dbHost;
 
     @Value("")
     private static Integer dbPort;
 
     @Value("")
-    private static String dbRootPassword;
+    private static String dbRootPassword;*/
 
     @Bean(name="mysqlDataSource")
     @Primary
