@@ -7,15 +7,19 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="user")
-public class User {
+public class UserEntity {
+
+    public UserEntity() {}
+
+    public UserEntity(String firstName, String lastName, String email, String password) {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
+    @Setter
     private long userId;
-
-    public User() {
-        super();
-    }
 
     @Column(name = "name", nullable = false, length = 100)
     @Getter
@@ -27,7 +31,6 @@ public class User {
     @Setter
     private String email;
 
-    // TODO Necessary to encrypt password
     @Column(name = "password", nullable = false, length = 64)
     @Getter
     @Setter
