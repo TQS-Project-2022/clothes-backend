@@ -1,3 +1,4 @@
+
 FROM amazoncorretto:11-alpine-jdk
 EXPOSE 8080
 MAINTAINER ua.pt

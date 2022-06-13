@@ -1,0 +1,15 @@
+# Jetbrains
+.idea/**/*
+
+# Git
+.github/**/*
+.gitignore
+
+# Spring boot
+mvnw
+mvnw.cmd
+
+# Docker
+Dockerfile
+
+
