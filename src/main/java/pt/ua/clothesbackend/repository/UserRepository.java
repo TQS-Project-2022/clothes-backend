@@ -8,7 +8,7 @@ import pt.ua.clothesbackend.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query("Select u FROM UserEntity u WHERE u.email = ?1")
+    @Query("Select u FROM User u WHERE u.email = ?1")
     public UserEntity findByEmail(String email);
 
 }
