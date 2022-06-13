@@ -8,11 +8,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name="user")
-public class UserEntity {
+public class User {
 
-    public UserEntity() {}
+    public User() {}
 
-    public UserEntity(
+    public User(
             String firstName, String lastName,
             String email, String password)
     {
@@ -24,11 +24,11 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="user_id", nullable = false, unique = true)
     @Getter
     @Setter
     private long userId;
 
-    @Column(name = "first_name", nullable = false, length = 100)
     @Getter
     @Setter
     private String firstName;
@@ -52,7 +52,7 @@ public class UserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        User that = (User) o;
         if (getUserId() != that.getUserId()) {
             return false;
         }

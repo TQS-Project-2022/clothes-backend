@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pt.ua.clothesbackend.data.UserData;
-import pt.ua.clothesbackend.entity.UserEntity;
+import pt.ua.clothesbackend.entity.User;
 import pt.ua.clothesbackend.exception.UserAlreadyExistException;
 import pt.ua.clothesbackend.repository.UserRepository;
 
@@ -26,7 +26,7 @@ public class DefaultUserService implements UserService {
         if(userExists(user.getEmail())){
             throw new UserAlreadyExistException("User already exists for this email");
         }
-        UserEntity userEntity = new UserEntity();
+        User userEntity = new User();
         BeanUtils.copyProperties(user, userEntity);
         encodePassword(userEntity, user);
         repository.save(userEntity);
@@ -39,11 +39,11 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Optional<UserEntity> getByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         return Optional.of(repository.findByEmail(email));
     }
 
-    private void encodePassword( UserEntity userEntity, UserData user){
+    private void encodePassword(User userEntity, UserData user){
         userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 

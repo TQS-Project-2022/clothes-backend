@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.clothesbackend.data.UserData;
-import pt.ua.clothesbackend.entity.UserEntity;
+import pt.ua.clothesbackend.entity.User;
 import pt.ua.clothesbackend.exception.UserAlreadyExistException;
-import pt.ua.clothesbackend.repository.UserRepository;
 import pt.ua.clothesbackend.service.UserService;
 
 import java.util.Optional;
@@ -23,10 +22,10 @@ public class UserController {
 
     @PostMapping("/register")
     @Nullable
-    public ResponseEntity<UserEntity> register(@RequestBody UserData userData) {
+    public ResponseEntity<User> register(@RequestBody UserData userData) {
         try {
             userService.register(userData);
-            Optional<UserEntity> user = userService.getByEmail(userData.getEmail());
+            Optional<User> user = userService.getByEmail(userData.getEmail());
             if (user.isPresent()) {
                 HttpStatus status = HttpStatus.CREATED;
                 return new ResponseEntity<>(user.get(), status);
