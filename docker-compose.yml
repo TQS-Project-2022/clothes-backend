@@ -1,0 +1,30 @@
+version: "3"
+services:
+  database:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password1
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=database
+#  clothes-backend:
+#    image: clothes-backend
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - database
+#  delivery-platform:
+#    image: delivery-platform
+#    build: ../delivery-platform/
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - database
+#  clothes-frontend:
+#    image: clothes-frontend
+#    build: ../clothes-frontend/
+#    ports:
+#      - "80:80"
