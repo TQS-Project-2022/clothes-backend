@@ -1,14 +1,16 @@
 version: "3"
 services:
   database:
-    image: mysql
+    image: mysql:${VERSION_MYSQL}
+    container_name: ${HOST_MYSQL}
     ports:
-      - "3306:3306"
+      - ${DOCKER_PORT_MYSQL}:${DOCKER_PORT_MYSQL}
     environment:
       - MYSQL_ROOT_PASSWORD=password1
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=database
+
 #  clothes-backend:
 #    image: clothes-backend
 #    build: .

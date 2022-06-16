@@ -6,26 +6,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pt.ua.clothesbackend.data.UserData;
-import pt.ua.clothesbackend.entity.User;
+import pt.ua.clothesbackend.dto.UserDTO;
+import pt.ua.clothesbackend.entity.UserEntity;
 import pt.ua.clothesbackend.exception.UserAlreadyExistException;
 import pt.ua.clothesbackend.service.UserService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-public class UserController {
+@RequestMapping("/auth")
+public class AuthController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping("/register")
     @Nullable
-    public ResponseEntity<User> register(@RequestBody UserData userData) {
+    public ResponseEntity<UserEntity> register(@RequestBody @Valid UserDTO userDTO) {
         try {
-            userService.register(userData);
-            Optional<User> user = userService.getByEmail(userData.getEmail());
+
+            userService.register(userDTO);
+            Optional<UserEntity> user = userService.getByEmail(userDTO.getEmail());
             if (user.isPresent()) {
                 HttpStatus status = HttpStatus.CREATED;
                 return new ResponseEntity<>(user.get(), status);

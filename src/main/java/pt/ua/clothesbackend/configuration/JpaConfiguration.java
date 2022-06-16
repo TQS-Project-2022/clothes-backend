@@ -1,3 +1,4 @@
+/*
 package pt.ua.clothesbackend.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -21,16 +22,19 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class JpaConfiguration {
 
-    /*@Value("")
+    */
+/*@Value("")
     private static String dbHost;
 
     @Value("")
     private static Integer dbPort;
 
     @Value("")
-    private static String dbRootPassword;*/
+    private static String dbRootPassword;*//*
 
-    @Bean(name="mysqlDataSource")
+
+    */
+/*@Bean(name="mysqlDataSource")
     @Primary
     public DataSource dataSource() {
 
@@ -39,9 +43,11 @@ public class JpaConfiguration {
         dataSourceBuilder.username("root");
         dataSourceBuilder.password("123456");
         return dataSourceBuilder.build();
-    }
+    }*//*
 
-    @Bean
+
+    */
+/*@Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
@@ -77,6 +83,8 @@ public class JpaConfiguration {
         properties.setProperty("generate-ddl", "True");
 
         return properties;
-    }
+    }*//*
+
 
 }
+*/

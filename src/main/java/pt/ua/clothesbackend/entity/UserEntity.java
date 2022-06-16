@@ -8,11 +8,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name="user")
-public class User {
+public class UserEntity {
 
-    public User() {}
+    public UserEntity() {}
 
-    public User(
+    public UserEntity(
             String firstName, String lastName,
             String email, String password)
     {
@@ -52,7 +52,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
+        UserEntity that = (UserEntity) o;
         if (getUserId() != that.getUserId()) {
             return false;
         }
