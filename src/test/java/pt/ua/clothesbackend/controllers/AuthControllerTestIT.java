@@ -9,8 +9,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.*;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import pt.ua.clothesbackend.dto.UserDTO;
 import pt.ua.clothesbackend.entity.UserEntity;
 import pt.ua.clothesbackend.repository.UserRepository;
@@ -19,13 +22,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureTestDatabase
+@Testcontainers
+@SpringBootTest
 public class AuthControllerTestIT {
 
-    // will need to use the server port for the invocation url
-    @LocalServerPort
-    int randomServerPort;
+    @Container
+    public static MySQLContainer container = new MySQLContainer()
+            .withDatabaseName("database")
+            .withUsername("root")
+            .withPassword("root");
 
     // a REST client that is test-friendly
     @Autowired

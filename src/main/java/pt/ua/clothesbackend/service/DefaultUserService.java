@@ -43,8 +43,4 @@ public class DefaultUserService implements UserService {
         return repository.findByEmail(email);
     }
 
-    private void encodePassword(UserEntity userEntity, UserDTO userDTO){
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-    }
-
 }
