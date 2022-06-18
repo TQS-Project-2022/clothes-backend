@@ -28,7 +28,6 @@ public class UserEntityServiceTest {
 
 
     @Test
-    @Disabled
     @DisplayName("When There is a valid user, return it by his email")
     void whenExistsUser_thenReturnsByEmail() {
         String email = "jon@email.pt";
@@ -44,22 +43,20 @@ public class UserEntityServiceTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("When There is a valid user, return true if exists")
     void whenExistsUser_thenReturnsTrue() {
         String email = "jon@email.pt";
         UserEntity john = new UserEntity("john", "doe", email, "passwword");
 
-        Mockito.when(repository.findByEmail(john.getEmail())).thenReturn(john);
+        Mockito.when(repository.existsByEmail(john.getEmail())).thenReturn(true);
 
         boolean found = service.userExists(john.getEmail());
         assertThat(found).isTrue();
 
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByEmail(email);
+        Mockito.verify(repository, VerificationModeFactory.times(1)).existsByEmail(email);
     }
 
     @Test
-    @Disabled
     @DisplayName("When calls user with invalid email, return null")
     void whenNotExistsUser_thenReturnsNull() {
         String email = "notexist@email.pt";
@@ -73,18 +70,16 @@ public class UserEntityServiceTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("When check user that not exists, return false")
     void whenNotExistsUser_thenReturnsFalse() {
         String email = "jon@email.pt";
 
-        Mockito.when(repository.findByEmail(email)).thenReturn(null);
+        Mockito.when(repository.existsByEmail(email)).thenReturn(false);
 
         boolean found = service.userExists(email);
         assertThat(found).isFalse();
 
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByEmail(email);
+        Mockito.verify(repository, VerificationModeFactory.times(1)).existsByEmail(email);
     }
-
 
 }

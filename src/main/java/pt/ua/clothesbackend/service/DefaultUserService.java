@@ -52,7 +52,11 @@ public class DefaultUserService implements UserService {
 
     @Override
     public Optional<UserEntity> getByEmail(String email) {
-        return Optional.of(repository.findByEmail(email));
+        UserEntity user = repository.findByEmail(email);
+        if(user == null) {
+            return Optional.empty();
+        }
+        return Optional.of(user);
     }
 
     private String encodePassword(String password) {

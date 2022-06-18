@@ -38,22 +38,6 @@ class UserEntityRepositoryTest {
     }
 
     @Test
-    @Disabled
-    @DisplayName("If a user is persisted, then the repository must find it by id")
-    void whenInsertUser_FindById(){
-        UserEntity renanFerreira = new UserEntity(
-                "Renan", "Ferreira", "renan@email.com", "password");
-        long renanId = renanFerreira.getUserId();
-        entityManager.persistAndFlush(renanFerreira);
-
-        UserEntity renanReturned = repository.findById(renanId);
-
-        assertThat( renanReturned ).isEqualTo(renanFerreira);
-
-    }
-
-    @Test
-    @Disabled
     @DisplayName("If a invalid user is requested by email, it returns null")
     void whenRequestedInvalidUser_thenReturnNull(){
 
@@ -63,19 +47,7 @@ class UserEntityRepositoryTest {
     }
 
     @Test
-    @Disabled
-    @DisplayName("If a invalid user is requested by id, it returns null")
-    void whenRequestedInvalidUserById_thenReturnNull(){
-
-        UserEntity fromDB = repository.findById(-11L);
-
-        assertThat( fromDB ).isNull();
-
-    }
-
-    @Test
-    @Disabled
-    @DisplayName("If a invalid user is requested by id, it returns null")
+    @DisplayName("When insert a certain number of users, then must return all")
     void whenInsertUsers_whenFindAll_thenReturnAll(){
         UserEntity renan = new UserEntity(
                 "Renan", "Ferreira", "renan@email.com", "password");
@@ -94,25 +66,6 @@ class UserEntityRepositoryTest {
         assertThat(userEntities).hasSize(3)
                 .extracting(UserEntity::getUserId)
                 .containsOnly(renan.getUserId(), thiago.getUserId(), adam.getUserId());
-
-    }
-
-    @Test
-    @Disabled
-    @DisplayName("After save a user with a certain email, if tries to save another user with the same email, it is not saved and if second user is requested by id, then return null")
-    void whenInsertUsersWithSameEmail_thenSecondUserIsNotPersisted(){
-        UserEntity renan = new UserEntity("Renan", "Ferreira", "renan@email.com", "password");
-        long renanId = renan.getUserId();
-        UserEntity thiago = new UserEntity("Thiago", "Brasil", "renan@email.com", "password");
-        long thiagoId = thiago.getUserId();
-
-        entityManager.persist(renan);
-        entityManager.persist(thiago);
-        entityManager.flush();
-
-        UserEntity thiagoFromDb = repository.findById(thiagoId);
-
-        assertThat(thiagoFromDb).isNull();
 
     }
 
