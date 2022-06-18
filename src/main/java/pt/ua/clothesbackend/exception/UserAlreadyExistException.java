@@ -7,8 +7,8 @@ public class UserAlreadyExistException extends Exception {
     @Getter
     private final String message;
 
-    public UserAlreadyExistException() {
-        this.message = "User already exists";
+    public UserAlreadyExistException(String email) {
+        this.message = String.format("User %s already exists", email);
     }
 
 }

@@ -33,8 +33,6 @@ public class AuthControllerTestIT {
             .withPassword("root");
 
     // a REST client that is test-friendly
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Autowired
     private UserRepository repository;

@@ -4,9 +4,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pt.ua.clothesbackend.dto.CredentialsDTO;
 import pt.ua.clothesbackend.dto.UserDTO;
 import pt.ua.clothesbackend.entity.UserEntity;
 import pt.ua.clothesbackend.exception.UserAlreadyExistException;
+import pt.ua.clothesbackend.exception.UserDoesNotExist;
 import pt.ua.clothesbackend.repository.UserRepository;
 
 import java.util.Optional;
@@ -24,13 +26,23 @@ public class DefaultUserService implements UserService {
     public void register(UserDTO userDTO) throws UserAlreadyExistException {
         //Let's check if user already registered with us
         if(userExists(userDTO.getEmail())){
-            throw new UserAlreadyExistException();
+            throw new UserAlreadyExistException(userDTO.getEmail());
         }
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userDTO, userEntity);
-        encodePassword(userEntity, userDTO);
+        userEntity.setPassword(encodePassword(userDTO.getPassword()));
         repository.save(userEntity);
+    }
 
+    @Override
+    public boolean checkCredentials(CredentialsDTO credentialsDTO) throws UserDoesNotExist {
+        String email = credentialsDTO.getEmail();
+        if(this.userExists(email)) {
+            UserEntity user = repository.findByEmail(email);
+            return user.getPassword().equals(encodePassword(credentialsDTO.getPassword()));
+        } else {
+            throw new UserDoesNotExist(credentialsDTO.getEmail());
+        }
     }
 
     @Override
@@ -40,7 +52,10 @@ public class DefaultUserService implements UserService {
 
     @Override
     public Optional<UserEntity> getByEmail(String email) {
-        return repository.findByEmail(email);
+        return Optional.of(repository.findByEmail(email));
     }
 
+    private String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
 }

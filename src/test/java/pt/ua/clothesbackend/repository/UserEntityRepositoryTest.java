@@ -24,7 +24,6 @@ class UserEntityRepositoryTest {
 
 
     @Test
-    @Disabled
     @DisplayName("If a user is persisted, then the repository must find it by email")
     void whenInsertUser_FindByEmail(){
         String email = "renan@email.com";
@@ -32,9 +31,8 @@ class UserEntityRepositoryTest {
                 "Renan", "Ferreira", email, "password");
         entityManager.persistAndFlush(renanFerreira);
 
-        Optional<UserEntity> renanReturned = repository.findByEmail(email);
-        assertThat( renanReturned.isEmpty() ).isFalse();
-        assertThat( renanReturned.get() ).isEqualTo(renanFerreira);
+        UserEntity renanReturned = repository.findByEmail(email);
+        assertThat( renanReturned ).isEqualTo(renanFerreira);
 
     }
 
@@ -58,8 +56,8 @@ class UserEntityRepositoryTest {
     @DisplayName("If a invalid user is requested by email, it returns null")
     void whenRequestedInvalidUser_thenReturnNull(){
 
-        Optional<UserEntity> fromDB = repository.findByEmail("it is not an email");
-        assertThat( fromDB.isEmpty() ).isTrue();
+        UserEntity fromDB = repository.findByEmail("it is not an email");
+        assertThat( fromDB ).isNull();
 
     }
 
