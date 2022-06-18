@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pt.ua.clothesbackend.dto.UserDTO;
 import pt.ua.clothesbackend.entity.UserEntity;
 import pt.ua.clothesbackend.exception.UserAlreadyExistException;
+import pt.ua.clothesbackend.service.DefaultUserService;
 import pt.ua.clothesbackend.service.UserService;
 
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private DefaultUserService userService;
 
     @PostMapping("/register")
     @Nullable

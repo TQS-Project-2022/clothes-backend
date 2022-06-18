@@ -15,11 +15,12 @@ public class DataSourceConfig {
     @Value("localhost")
     private String hostDB;
 
-    //@Value("${DOCKER_PORT_MYSQL}")
-    @Value("3306")
+    @Value("${DOCKER_PORT_MYSQL}")
+    //@Value("3306")
     private int portDB;
 
     @Value("${DATABASE_NAME}")
+    //@Value("clothes_app")
     private String nameDB;
 
     @Value("root")
