@@ -3,6 +3,7 @@ package pt.ua.clothesbackend.repository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -45,7 +46,7 @@ class UserEntityRepositoryTest {
         long renanId = renanFerreira.getUserId();
         entityManager.persistAndFlush(renanFerreira);
 
-        UserEntity renanReturned = repository.findById(renanId).orElse(null);
+        UserEntity renanReturned = repository.findById(renanId);
 
         assertThat( renanReturned ).isEqualTo(renanFerreira);
 
@@ -66,7 +67,7 @@ class UserEntityRepositoryTest {
     @DisplayName("If a invalid user is requested by id, it returns null")
     void whenRequestedInvalidUserById_thenReturnNull(){
 
-        UserEntity fromDB = repository.findById(-11L).orElse(null);
+        UserEntity fromDB = repository.findById(-11L);
 
         assertThat( fromDB ).isNull();
 
@@ -109,13 +110,10 @@ class UserEntityRepositoryTest {
         entityManager.persist(thiago);
         entityManager.flush();
 
-        UserEntity thiagoFromDb = repository.findById(thiagoId).orElse(null);
+        UserEntity thiagoFromDb = repository.findById(thiagoId);
 
         assertThat(thiagoFromDb).isNull();
 
     }
-
-
-
 
 }
