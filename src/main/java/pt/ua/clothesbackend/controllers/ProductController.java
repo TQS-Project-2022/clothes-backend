@@ -11,6 +11,7 @@ import pt.ua.clothesbackend.services.ProductService;
 @Controller
 @RequestMapping("/products")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ProductController {
     private final ProductService productService;
 
